@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>RandomNumber</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="darkly.css" media="screen">
+    <link rel="stylesheet" href="RandomNumber.css">
+    <script src=nebPay.js></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div id="content">
+      <div class="input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Min Number:</span>
+          </div>
+          <input type=number id=new_request_min class="form-control"></input>
+      </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Max Number:</span>
+            </div>
+            <input type=number id=new_request_max class="form-control"></input>
+        </div>
+        <div class="input-group">
+            <button id=request_number onclick="javascript:onClickRequestNumber()" class="btn btn-primary">Request Random Number</button>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src=RandomNumber.js></script>
+
+    <script>
+        "use strict";
+
+        var NebPay = require("nebpay");
+        var nebPay = new NebPay();
+
+        function onClickRequestNumber() {
+          var min = parseInt($("#new_request_min").val());
+          var max = parseInt($("#new_request_max").val());
+
+            nebPay.call(contract_address, 0, "requestNumber", JSON.stringify([max, min]), {
+                listener: onRequestNumber
+            });
+        }
+
+        function onRequestNumber(resp) {
+            if(typeof(resp)==='string' && resp.startsWith("Error")) {
+                throw new Error(resp);
+            }
+
+            var href = window.location.href;
+            var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+            window.location = dir + 'results.html?txhash=' + resp.txhash;
+        }
+
+        //to check if the extension is installed
+        //if the extension is installed, var "webExtensionWallet" will be injected in to web page
+        if(typeof(webExtensionWallet) === "undefined"){
+            alert ("Extension wallet is not installed, redirecting you to more information.");
+            var href = window.location.href;
+            var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+            window.location =  dir + 'about.html';
+        }
+    </script>
+</body>
+</html>

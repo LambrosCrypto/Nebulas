@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>RandonNumber</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="darkly.css" media="screen">
+    <link rel="stylesheet" href="RandonNumber.css" media="screen">
+    <script src=nebPay.js></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div id=content>
+TODO
+<!--
+    Decentralized Game Server!
+
+    Benefits:
+     - Cheating is detected.
+     - Game always available, does not depend on a server.
+
+ -->
+
+
+
+        <h2>Randon Number</h2>
+        Verifable random numbers, powered by Nebulas.<br><br>
+        <h4>How-to:</h4>
+        <ul>
+            <li>Enter a max, to select a number between 0 and max-1 inclusive.</li>
+            <li>Enter associated data.</li>
+            <li>Click 'Request Number'.</li>
+            <li>You'll be redirected to a link you can share with the selected number (once the transaction completes).</li>
+        </ul>
+
+        <h4>For example:</h4>
+        I want to do a giveaway on Twitter.  Unless people watch me do the entire process live, they will suspect cheating. <br><br>
+        We need to know that the number was randomly selected and that the order of the list was not modified after the fact.<br><br>
+        By posting the 'data', you can use this service for any use case requiring a verifiable random selection - allowing people to manually confirm it was done fairly.<br>
+
+        <br>This is a free service, only pay a small transaction fee.
+
+        <br><br>
+        <h2>Requirements</h2>
+        Anyone can view a random number selected with this tool.  In order to request a new random number, you will need $nas for gas and the
+        WebExtensionWallet available here: <a href="https://github.com/ChengOrangeJu/WebExtensionWallet">https://github.com/ChengOrangeJu/WebExtensionWallet</a>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src=RandonNumber.js></script>
+</body>
+</html>
