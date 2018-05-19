@@ -1,0 +1,32 @@
+#content {
+    width:85%;
+    margin: 0 auto;
+}
+.input-group {
+    margin-top:1em;
+}
+#footer {
+    padding-top: 4em;
+    padding-left: 1em;
+}
+#txhash {
+    width:40em;
+}
+#rnc_request_number {
+    font-size: 500%;
+    font-weight: bolder;
+    height:40vh;
+}
+#rnc_request_max {
+    font-weight: bolder;
+}
+.results {
+    padding-left: 3em;
+}
+#rnc_request_min {
+    /*border: 1px solid white;
+    margin: .75em;
+    padding: .75em;
+    white-space: pre;*/
+    font-weight: bolder;
+}
