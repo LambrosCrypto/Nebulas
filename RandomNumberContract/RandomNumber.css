@@ -20,12 +20,9 @@
 #rnc_request_max {
     font-weight: bolder;
 }
+#rnc_request_min {
+    font-weight: bolder;
+}
 .results {
     padding-left: 3em;
-}
-#rnc_request_min {
-    border: 1px solid white;
-    margin: .75em;
-    padding: .75em;
-    white-space: pre;
 }

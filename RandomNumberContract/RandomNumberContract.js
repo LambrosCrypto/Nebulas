@@ -17,7 +17,7 @@ RandonNumberContract.prototype = {
   // init is called once, when the contract is deployed.
   init: function() { },
 
-  requestNumber: function (min, max) {
+  requestNumber: function (max, min) {
     if(Blockchain.transaction.value != 0) { // Users only pay the gas fee.
         throw new Error("I don't want your money.");
     }
@@ -25,8 +25,8 @@ RandonNumberContract.prototype = {
       throw new Error("max is not a number.");
     }
 
-    return Math.floor(Math.random()*(max-min+1)+min);
-    this.hash_to_rnc.put(Blockchain.transaction.hash, {min, max, number, date: Date.now()});
+    var number  = Math.floor(Math.random()*(max-min+1)+min);
+    this.hash_to_rnc.put(Blockchain.transaction.hash, {max, min, number, date: Date.now()});
   },
 
   getNumber: function (hash) {
