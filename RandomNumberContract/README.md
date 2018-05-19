@@ -1,4 +1,4 @@
 https://hardlydifficult.github.io/DecentralizedRNG/
 
-Built for Nebulas by HardlyDifficult.  youtube.com/HardlyDifficult
-License: https://github.com/hardlydifficult/DecentralizedRNG/blob/master/LICENSE
+Built for Nebulas by LambrosCrypto.  youtube.com/lambroscrypto
+License: https://github.com/lambroscrypto/Nebulas/
