@@ -4,9 +4,9 @@
 // e.g. If I'm doing a giveaway, post a numbered list with the request so that the list can't be modified after a number was selected.
 
 // Built for Nebulas by HardlyDifficult.  youtube.com/HardlyDifficult
-// License: https://github.com/hardlydifficult/DecentralizedRNG/blob/master/LICENSE
+// License: https://github.com/lambroscrypto/Nebulas/RandomNumberContract/master/LICENSE
 //
-// See also https://github.com/hardlydifficult/DecentralizedRNG/
+// See also https://github.com/lambroscrypto/Nebulas/RandomNumberContract
 
 var RandonmNumberContract = function() {
   // Data stored by the smart contract
