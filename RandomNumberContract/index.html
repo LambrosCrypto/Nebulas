@@ -50,7 +50,7 @@
                 listener: onRequestNumber
             });
         }
-//POLLA
+
         function onRequestNumber(resp) {
             if(typeof(resp)==='string' && resp.startsWith("Error")) {
                 throw new Error(resp);
