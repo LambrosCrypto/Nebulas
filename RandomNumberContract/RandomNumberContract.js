@@ -25,7 +25,7 @@ RandonNumberContract.prototype = {
       throw new Error("max is not a number.");
     }
 
-    return Math.floor(Math.random()*(max-min+1)+min);
+    return Math.floor(Math.random()*(maxi-min+1)+min);
     this.hash_to_rnc.put(Blockchain.transaction.hash, {min, max, number, date: Date.now()});
   },
 
