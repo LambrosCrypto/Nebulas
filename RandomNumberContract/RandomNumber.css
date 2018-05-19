@@ -24,9 +24,8 @@
     padding-left: 3em;
 }
 #rnc_request_min {
-    /*border: 1px solid white;
+    border: 1px solid white;
     margin: .75em;
     padding: .75em;
-    white-space: pre;*/
-    font-weight: bolder;
+    white-space: pre;
 }
