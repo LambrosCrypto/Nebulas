@@ -17,7 +17,7 @@ RandonNumberContract.prototype = {
   // init is called once, when the contract is deployed.
   init: function() { },
 
-  function getRndInteger(min, max) {
+  function requestNumber(min, max) {
     if(Blockchain.transaction.value != 0) // Users only pay the gas fee.
         throw new Error("I don't want your money.");
 
