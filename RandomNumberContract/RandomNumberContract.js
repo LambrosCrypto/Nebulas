@@ -17,15 +17,14 @@ RandonNumberContract.prototype = {
   // init is called once, when the contract is deployed.
   init: function() { },
 
-  requestNumber: function (max, min) {
-    if(Blockchain.transaction.value != 0) { // Users only pay the gas fee.
+  function getRndInteger(min, max) {
+    if(Blockchain.transaction.value != 0) // Users only pay the gas fee.
         throw new Error("I don't want your money.");
-    }
-    if(isNaN(max) || max < 1) {
-      throw new Error("max is not a number.");
-    }
 
-    var number  = Math.floor(Math.random()*(max-min+1)+min);
+    if(isNaN(max) || max < 1)
+      throw new Error("max is not a number.");
+
+    var number = Math.floor(Math.random() * (max - min + 1) ) + min;
     this.hash_to_rnc.put(Blockchain.transaction.hash, {max, min, number, date: Date.now()});
   },
 
