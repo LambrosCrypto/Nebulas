@@ -1,4 +1,4 @@
-// DecentralizedRNG leverages the blockchain to select a random number.
+// RandomNumber leverages the blockchain to select a random number.
 // When you request a number, you can post any data with the request.
 // This way what you are selecting is verifiable as well.
 // e.g. If I'm doing a giveaway, post a numbered list with the request so that the list can't be modified after a number was selected.
