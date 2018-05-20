@@ -46,7 +46,7 @@
           var min = parseInt($("#new_request_min").val());
           var max = parseInt($("#new_request_max").val());
 
-            nebPay.call(contract_address, 0, "requestNumber", JSON.stringify([max, min]), {
+            nebPay.call(contract_address, 0, "requestNumber", JSON.stringify([min, max]), {
                 listener: onRequestNumber
             });
         }
