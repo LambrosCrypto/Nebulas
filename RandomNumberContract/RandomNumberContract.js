@@ -21,10 +21,10 @@ RandonNumberContract.prototype = {
     if(Blockchain.transaction.value != 0) // Users only pay the gas fee.
         throw new Error("I don't want your money.");
 
-    if(isNaN(max) || max < 1)
+    if(isNaN(max) || max < 1) //Proving max is a number.
       throw new Error("max is not a number.");
 
-    var number = Math.floor(Math.random() * (max - min + 1) ) + min;
+    var number = Math.floor(Math.random() * (max - min + 1) ) + min; //Random number min -> max both included.
     this.hash_to_rnc.put(Blockchain.transaction.hash, {max, min, number, date: Date.now()});
   },
 
