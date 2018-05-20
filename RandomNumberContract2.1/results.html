@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Randon Number Generator - Powered by Nebulas Blockchain</title>
+  <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/flexslider.css" rel="stylesheet" >
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/queries.css" rel="stylesheet">
+  <link href="css/animate.css" rel="stylesheet">
+  <script src=nebulas.js></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</head>
+<body>
+  <section class="hero" id="hero">
+    <div id="header"></div>
+
+    <div id=content>
+        <!-- Displays a refresh button until the data is available -->
+        <div id=rnc_request_pending>
+          <h1 class="animated fadeInDown">&nbspProcessing <span>...</span></h1>
+            <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspWaiting for the transaction to be confirmed by Nebulas Blockchain.</p>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button id=refresh onclick="javascript:onClickRefresh()" class="learn-more-btn">Refresh</button>
+        </div>
+
+        <!-- Displays a previous rnc request (if applicable) -->
+        <div id=rnc_request>
+          <h1 class="animated fadeInDown">&nbspSelected <span>Number</span></h1>
+
+                <h1 class="animated fadeInUp">&nbsp&nbsp&nbsp <span id=rnc_request_number></span></h1>
+
+              <br>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRandom number selected at <span id=rnc_request_date></span>.</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRange: <span id=rnc_request_min></span> (inclusive) -> <span id=rnc_request_max></span> (inclusive)</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a id="viewTx" href="#">View Transaction</a> as Proof on the Block Explorer.</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+    <div id="footer"></div>
+
+    <script src=RandomNumber.js></script>
+
+    <script>
+        "use strict";
+
+        $("#viewTx").attr('href', "https://explorer.nebulas.io/#/tx/" + window.location.search.substr(1));
+        $("#rnc_request").hide();
+
+        // Gas hard coded for simplicity, ideally your app would allow for changing the gas price, etc.
+        var is_mainnet = false;
+        var nebulas_chain_id, nebulas_domain;
+        var gas_price = 1000000;
+        var gas_limit = 200000;
+
+        if(is_mainnet) {
+            nebulas_chain_id = 1;
+            nebulas_domain = "https://mainnet.nebulas.io";
+        } else {
+            nebulas_chain_id = 1001;
+            nebulas_domain = "https://testnet.nebulas.io";
+        }
+
+        // The nebulas API, used for signing transactions, etc
+        var nebulas = require("nebulas");
+        var neb = new nebulas.Neb();
+        neb.setRequest(new nebulas.HttpRequest(nebulas_domain));
+
+        // Called by the Refresh button and auto-called every few seconds
+        function onClickRefresh() {
+            neb.api.call({
+                from: contract_address, // Using the contract here so this can be called without loggin on.
+                to: contract_address,
+                value: 0,
+                nonce: 0, // Nonce is irrelavant when read-only (there is no transaction charge)
+                gasPrice: gas_price,
+                gasLimit: gas_limit,
+                contract: {function: "getNumber", args: JSON.stringify([window.location.search.substr(8)])} //?txhash=
+            }).then(function (resp) {
+                var response = JSON.parse(resp.result);
+                if(response) {
+                    $("#rnc_request").show();
+                    $("#rnc_request_pending").hide();
+
+                    $("#rnc_request_number").text(response.number);
+                    $("#rnc_request_date").text(new Date(response.date));
+                    $("#rnc_request_min").text(response.min);
+                    $("#rnc_request_max").text(response.max);
+
+                    /*var span = $("<span></span>").text(response.min);
+                    $("#rnc_request_min").empty();
+                    $("#rnc_request_min").append(span);
+                    */
+                } else {
+                    setTimeout(onClickRefresh, 3000); // Auto-refresh every few seconds
+                }
+            });
+        }
+
+        onClickRefresh();
+    </script>
+</body>
+</html>
