@@ -2,12 +2,16 @@
 <html>
 <head>
 <style>
+
+// Esto es solo una prueba
 .topright {
     position: absolute;
     top: 8px;
     right: 16px;
     font-size: 18px;
 }
+//Esto es para meterle una tabulación
+p.indent{ padding-left: 1.8em }
 </style>
     <meta charset=utf-8>
     <title>Header</title>
@@ -21,21 +25,24 @@
 </head>
 <body>
   <div id="header">
-    <h1><b>Randon Number Generator<b></h1>
+    <p class="indent"><h1><b>&nbsp&nbspRandon Number Generator<b></h1></p>
   </div>
 
   <div class="nav-item">
-      <a class="btn btn-primary" href="./index.html">Home</a>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class="btn btn-primary" href="./index.html">Home</a>
   </div>
   <br>
   <div class="nav-item">
-      <a class="btn btn-primary" href="./about.html">About</a>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class="btn btn-primary" href="./about.html">About</a>
+  </div>
+  <br>
+  <div>
+  &nbsp&nbsp<form class="form-inline my-2 my-lg-0" action="./results.html">
+  &nbsp&nbsp<input id="txhash" name="txhash" class="form-control mr-sm-2" type="text" placeholder="Lookup Transaction Hash">
+  &nbsp&nbsp<button class="btn btn-primary my-2 my-sm-0" type="submit">Lookup</button>
   </div>
 
   <div id="footer">
-    <form class="form-inline my-2 my-lg-0" action="./results.html">
-    <input id="txhash" name="txhash" class="form-control mr-sm-2" type="text" placeholder="Lookup Transaction Hash">
-    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Lookup</button>
   </div>
 <body>
 
