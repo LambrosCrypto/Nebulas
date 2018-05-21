@@ -71,13 +71,6 @@
                 <div id="content">
                   <div class="arrow">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">Min Number</span>
-                    </div>
-                  <input type=number id=new_request_min class="form-control"></input>
-                  </div>
-                  <br>
-                  <div class="arrow">
-                    <div class="input-group-prepend">
                       <span class="input-group-text">Max Number</span>
                     </div>
                     <input type=number id=new_request_max class="form-control"></input>
@@ -101,10 +94,9 @@
               var nebPay = new NebPay();
 
               function onClickRequestNumber() {
-                var min = parseInt($("#new_request_min").val());
                 var max = parseInt($("#new_request_max").val());
 
-                  nebPay.call(contract_address, 0, "requestNumber", JSON.stringify([max, min]), {
+                  nebPay.call(contract_address, 0, "requestNumber", JSON.stringify([max, 0]), {
                       listener: onRequestNumber
                   });
               }
@@ -137,11 +129,11 @@
                 <div class="features-wrapper">
                   <div class="col-md-4 wp2">
                     <h2>WHAT IS THIS?</h2>
-                    <p>This DApp generates a random number between a minimum and a maximum, both inclusive. This is a free service, only pay a small transaction fee.</p>
+                    <p>This DApp generates a random number between 0 and a maximum, both inclusive. This is a free service, only pay a small transaction fee.</p>
                   </div>
                   <div class="col-md-4 wp2 delay-05s">
                     <h2>HOW-TO</h2>
-                    <p>1. Enter a minimum number.<br>2. Enter a maximum number.<br>3. Click 'Request Number'.<br>4. You'll be redirected to a link<br>with the selected number.</p>
+                    <p>1. Enter a maximum number.<br>2. Click 'Request Number'.<br>3 You'll be redirected to a link<br>with the selected number.</p>
                   </div>
                   <div class="col-md-4 wp2 delay-1s">
                     <!-- Esto es lo que hace el circulo verde

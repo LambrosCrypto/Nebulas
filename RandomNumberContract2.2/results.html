@@ -83,7 +83,7 @@
 
                   <br>
                     <p>Random number selected at <span id=rnc_request_date></span>.</p>
-                    <p>Range: <span id=rnc_request_min></span> (inclusive) -> <span id=rnc_request_max></span> (inclusive)</p>
+                    <p>Range:0 (inclusive) -> <span id=rnc_request_max></span> (inclusive)</p>
                     <p><a id="viewTx" href="#">View Transaction</a> as Proof on the Block Explorer.</p>
                 </div>
             </div>
@@ -135,13 +135,7 @@
 
                         $("#rnc_request_number").text(response.number);
                         $("#rnc_request_date").text(new Date(response.date));
-                        $("#rnc_request_min").text(response.min);
                         $("#rnc_request_max").text(response.max);
-
-                        /*var span = $("<span></span>").text(response.min);
-                        $("#rnc_request_min").empty();
-                        $("#rnc_request_min").append(span);
-                        */
                     } else {
                         setTimeout(onClickRefresh, 3000); // Auto-refresh every few seconds
                     }
@@ -159,11 +153,11 @@
                 <div class="features-wrapper">
                   <div class="col-md-4 wp2">
                     <h2>WHAT IS THIS?</h2>
-                    <p>This DApp generates a random number between a minimum and a maximum, both inclusive. This is a free service, only pay a small transaction fee.</p>
+                    <p>This DApp generates a random number between 0 and a maximum, both inclusive. This is a free service, only pay a small transaction fee.</p>
                   </div>
                   <div class="col-md-4 wp2 delay-05s">
                     <h2>HOW-TO</h2>
-                    <p>1. Enter a minimum number.<br>2. Enter a maximum number.<br>3. Click 'Request Number'.<br>4. You'll be redirected to a link<br>with the selected number.</p>
+                    <p>1. Enter a maximum number.<br>2. Click 'Request Number'.<br>3. You'll be redirected to a link<br>with the selected number.</p>
                   </div>
                   <div class="col-md-4 wp2 delay-1s">
                     <!-- Esto es lo que hace el circulo verde
