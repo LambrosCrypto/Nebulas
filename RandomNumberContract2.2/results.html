@@ -68,21 +68,23 @@
           <div id=content>
             <!-- Displays a refresh button until the data is available -->
             <div id=rnc_request_pending>
-              <h1 class="animated fadeInDown">&nbspProcessing <span>...</span></h1>
-                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspWaiting for the transaction to be confirmed by Nebulas Blockchain.</p>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button id=refresh onclick="javascript:onClickRefresh()" class="learn-more-btn">Refresh</button>
+              <h1 class="animated fadeInDown">Processing <span>...</span></h1>
+                <div class="loader"></div>
+                <p>Waiting for the transaction to be confirmed by Nebulas Blockchain.</p>
+                <button id=refresh onclick="javascript:onClickRefresh()" class="learn-more-btn">Refresh</button>
             </div>
+
 
             <!-- Displays a previous rnc request (if applicable) -->
             <div id=rnc_request>
-              <h1 class="animated fadeInDown">&nbspSelected <span>Number</span></h1>
+              <h1 class="animated fadeInDown">Selected <span>Number</span></h1>
 
-                    <h1 class="animated fadeInUp">&nbsp&nbsp&nbsp <span id=rnc_request_number></span></h1>
+                    <h1 class="animated fadeInUp"><span id=rnc_request_number></span></h1>
 
                   <br>
-                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRandom number selected at <span id=rnc_request_date></span>.</p>
-                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRange: <span id=rnc_request_min></span> (inclusive) -> <span id=rnc_request_max></span> (inclusive)</p>
-                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a id="viewTx" href="#">View Transaction</a> as Proof on the Block Explorer.</p>
+                    <p>Random number selected at <span id=rnc_request_date></span>.</p>
+                    <p>Range: <span id=rnc_request_min></span> (inclusive) -> <span id=rnc_request_max></span> (inclusive)</p>
+                    <p><a id="viewTx" href="#">View Transaction</a> as Proof on the Block Explorer.</p>
                 </div>
             </div>
         </div>
