@@ -97,7 +97,8 @@
               </script>
               <!-- Displays a refresh button until the data is available -->
               <div id=rnc_request_pending>
-                <h1 class="animated fadeInDown">Processing <span>...</span></h1>
+                <h1 class="animated fadeInDown">Processing</h1>
+                <br>
                   <div class="loader"></div>
                   <p>Waiting for the transaction to be confirmed by Nebulas Blockchain.</p>
                   <button id=refresh onclick="javascript:onClickRefresh()" class="learn-more-btn">Refresh</button>
@@ -108,12 +109,11 @@
               <div id=rnc_request>
                 <h1 class="animated fadeInDown">Selected <span>Number</span></h1>
 
-                      <h1 class="animated fadeInUp"><span id=rnc_request_number></span></h1>
+                      <b><h1 class="animated fadeInDown delay-05s"><span id=rnc_request_number></span></h1></b>
 
-                    <br>
-                      <p>Random number selected at <span id=rnc_request_date></span>.</p>
-                      <p>Range:0 (inclusive) -> <span id=rnc_request_max></span> (inclusive)</p>
-                      <p><a id="viewTx" href="#">View Transaction</a> as Proof on the Block Explorer.</p>
+                      <p class="animated fadeInUp delay-1s">Random number selected at <span id=rnc_request_date></span>.
+                      <br>Range: 0 (inclusive) -> <span id=rnc_request_max></span> (inclusive).
+                      <br><br><a id="viewTx" href="#">View Transaction</a> as Proof on the Block Explorer.</p>
                       <button id=refresh onclick="javascript:goHome()" class="learn-more-btn">Go home</button>
                   </div>
               </div>
