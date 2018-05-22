@@ -210,10 +210,12 @@ nav ul li a:hover, nav ul li a:focus { text-decoration: none; color: rgba(255, 2
 .indicator { position: absolute; right: 0 !important; }
 .pull { display: none; }
 .page-header {
-    background: url('../img/logo.png') no-repeat;
-    width: 425px;
-    height: 63px;
+		border: none;
+    background: url(../img/logo.png) no-repeat;
+    width: auto;
+    height: 150%;
     margin: 0;
+		background-size: contain;
 }
 
 /* ==========================================================================
