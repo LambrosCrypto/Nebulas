@@ -1,2 +1,2 @@
 # Nebulas
-Creating some Nebulas DApps.
+Here we are going to create multiple DApps for the Nebulas Blockchain.
