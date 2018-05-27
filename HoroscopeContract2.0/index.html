@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<!--
+	Intensify by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Horoscope | powered by Nebulas</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css">
+		<link rel="shortcut icon" href="https://nebulas.io/assets/images/logo.png" type="image/x-icon">
+    <script src=nebPay.js></script>
+    <script src=nebulas.js></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<nav class="left">
+					<a href="#menu"><span>Menu</span></a>
+				</nav>
+				<a href="index.html" class="logo">Horoscope</a>
+				<nav class="right">
+					<a href="https://www.nebulas.io" ><img src="images/logo.png" alt="Nebulas" height="40" width="179"></a>
+				</nav>
+			</header>
+
+		<!-- Menu -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="#one" class="scrolly">Horoscope finder</a></li>
+					<li><a href="#two" class="scrolly">About</a></li>
+					<li><a href="#footer" class="scrolly">Get in Touch</a></li>
+				</ul>
+				<ul class="actions vertical">
+					<li><a href="#" class="button fit">Nebulas</a></li>
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section id="banner">
+				<div class="content">
+					<h1>Want to know your horscope?</h1>
+					<p>Find out your horscope by entering your birthday, <br> powered by <a href="https://nebulas.io"><em>Nebulas.</em></a></br></p>
+					<ul class="actions">
+						<li><a href="#one" class="button scrolly">Get Started</a></li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- One -->
+			<section id="one" class="wrapper style1 special">
+				<div>
+				<!-- INPUT INTERFAZE-->
+				<div class="inner" id="one.one">
+					<script>
+						if(window.location.href.indexOf("txhash=") != -1){
+							document.getElementById("one.one").style.display = "none";
+							document.getElementById("one.two").style.display = "block";
+						}
+					</script>
+					<div>
+						<h1> Horoscope Finder</h1>
+						<br>
+						<div id="content">
+							<div>
+								<div>
+									<span>Day (1-31)</span>
+								</div>
+								<input type=number id=new_request_day></input>
+							</div>
+							<div>
+								<div>
+									<span>Month (1-12)</span>
+								</div>
+								<input type=number id=new_request_month></input>
+							</div>
+							<br>
+							<div>
+								<button href="#one" id=request_horoscope onclick="myFunction();myFunction2();javascript:onClickRequestHoroscope()" class="learn-more-btn">Request Horoscope</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- RESULTS INTERFAZE-->
+				<div id="one.two">
+					<script>
+					if(window.location.href.indexOf("txhash=") == -1){
+						document.getElementById("one.two").style.display = "none";
+					}
+					</script>
+					<!-- Displays a refresh button until the data is available -->
+					<div id=hor_request_pending>
+						<h1 class="animated fadeInDown">Processing</h1>
+						<br>
+							<div class="loader"></div>
+							<br>
+							<p>Waiting for the transaction to be confirmed by Nebulas Blockchain.</p>
+							<button id=refresh onclick="javascript:onClickRefresh()" class="learn-more-btn">Refresh</button>
+					</div>
+
+					<div id=hor_request>
+						<h1 class="animated fadeInDown">Your <span>Horoscope is</span></h1>
+
+									<b><h1 class="animated fadeInDown delay-05s"><span id=hor_request_horoscope></span></h1></b>
+
+									<p class="animated fadeInUp delay-1s">Horoscope shown at <span id=hor_request_date></span>.
+									<br><br><a id="viewTx" href="#">View Transaction</a> as Proof on the Block Explorer.</p>
+									<button id=refresh onclick="javascript:goHome()" class="learn-more-btn">Go home</button>
+							</div>
+					</div>
+					<!-- HIDE INPUT INTERFAZE FUNCTION -->
+					<script>
+						function myFunction() {
+							var x = document.getElementById("one.one");
+							if (x.style.display === "none") {
+								x.style.display = "block";
+							} else {
+								x.style.display = "none";
+							}
+						}
+					</script>
+					<!-- HIDE RESULTS INTERFAZE FUNCTION -->
+					<script>
+						function myFunction2() {
+							var y = document.getElementById("one.two");
+							if (y.style.display === "none") {
+								y.style.display = "block";
+							} else {
+								y.style.display = "none";
+							}
+						}
+					</script>
+				</div>
+				<script src=Horoscope.js></script>
+				<!-- INPUT SCRIPT-->
+				<script>
+						"use strict";
+
+						$("#viewTx").attr('href', "https://explorer.nebulas.io/#/tx/" + window.location.search.substr(1));
+						$("#hor_request").hide();
+
+						// Gas hard coded for simplicity, ideally your app would allow for changing the gas price, etc.
+						var is_mainnet = false;
+						var nebulas_chain_id, nebulas_domain;
+						var gas_price = 1000000;
+						var gas_limit = 200000;
+
+						if(is_mainnet) {
+								nebulas_chain_id = 1;
+								nebulas_domain = "https://mainnet.nebulas.io";
+						} else {
+								nebulas_chain_id = 1001;
+								nebulas_domain = "https://testnet.nebulas.io";
+						}
+
+						var nebulas = require("nebulas");
+						var neb = new nebulas.Neb();
+						neb.setRequest(new nebulas.HttpRequest(nebulas_domain));
+
+						function onClickRefresh() {
+								neb.api.call({
+										from: contract_address,
+										to: contract_address,
+										value: 0,
+										nonce: 0,
+										gasPrice: gas_price,
+										gasLimit: gas_limit,
+										contract: {function: "getHoroscope", args: JSON.stringify([window.location.search.substr(8)])}
+								}).then(function (resp) {
+										var response = JSON.parse(resp.result);
+										if(response) {
+												$("#hor_request").show();
+												$("#hor_request_pending").hide();
+
+												$("#hor_request_horoscope").text(response.horoscope);
+												$("#hor_request_date").text(new Date(response.date));
+												$("#hor_request_day").text(response.day);
+												$("#hor_request_month").text(response.month);
+										} else {
+												setTimeout(onClickRefresh, 3000);
+										}
+								});
+						}
+
+						onClickRefresh();
+				</script>
+				<!-- RESULTS SCRIPT -->
+				<script>
+						"use strict";
+
+						var NebPay = require("nebpay");
+						var nebPay = new NebPay();
+
+						function onClickRequestHoroscope() {
+							var day = parseInt($("#new_request_day").val());
+							var month = parseInt($("#new_request_month").val());
+
+								nebPay.call(contract_address, 0, "requestHoroscope", JSON.stringify([day, month]), {
+										listener: onRequestHoroscope
+								});
+						}
+						function onRequestHoroscope(resp) {
+								if(typeof(resp)==='string' && resp.startsWith("Error")) {
+										throw new Error(resp);
+								}
+								if (history.pushState) {
+									var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?txhash=' + resp.txhash;
+									window.history.pushState({path:newurl},'',newurl);
+								}
+						}
+						//GO TO MAIN PAGE (INDEX) FUNCTION
+						function goHome(){
+							var href = window.location.href;
+							var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+							window.location = dir + "index.html";
+						}
+
+						if(typeof(webExtensionWallet) === "undefined"){
+								alert ("Extension wallet is not installed, redirecting you to more information.");
+								var href = window.location.href;
+								var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+								window.location =  dir + 'noextension.html';
+						}
+				</script>
+			</section>
+			<!-- Two -->
+				<section id="two" class="wrapper">
+				<div class="inner">
+						<h2><center>About</center></h2>
+						<br>
+					<div class="inner flex flex-3">
+						<div class="flex-item left">
+							<div>
+								<h3>WHAT IS THIS?</h3>
+								<p>This DApp finds your horscope according to you birthday. This is a free service, only pay a small transaction fee.</p>
+							</div>
+							<div>
+								<h3>REQUIREMENTS</h3>
+								<p>Anyone can view a random number selected with this tool.  In order to request a random number, you will need $nas for gas and the
+                    WebExtensionWallet available here: <a href="https://github.com/ChengOrangeJu/WebExtensionWallet">Github</a>.</p>
+							</div>
+						</div>
+						<div class="flex-item image fit round">
+							<img src="images/about.png" alt="" />
+						</div>
+						<div class="flex-item right">
+							<div>
+								<br>
+								<br>
+								<h3>HOW-TO</h3>
+								<p>1. Enter your day of birth.<br>2. Enter your month of birth.<br>3. Click 'Find Horoscope'<br>4. You'll be redirected to a link with your horoscope.</p>
+							</div>
+						</div>
+					</div>
+					</div>
+				</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<h2>Get In Touch</h2>
+					<ul class="actions">
+						<li><span class="icon fa-map-marker"></span><a href="https://www.google.es/maps/place/Espa%C3%B1a/@40.1217725,-8.2010209,6z/data=!3m1!4b1!4m5!3m4!1s0xc42e3783261bc8b:0xa6ec2c940768a3ec!8m2!3d40.463667!4d-3.74922"><em>Spain</em></a></li>
+						<br> <br>
+						<li><span class="icon fa-github"></span><a href="https://github.com/LambrosCrypto"><em>LambrosCrypto</em></a></li>
+						<br> <br>
+						<li><span class="icon fa-envelope"></span><a href="mailto:cryptoprojectspain@gmail.com"><em>cryptoprojectspain@gmail.com</em></a></li>
+					</ul>
+				</div>
+				<br> <br> <br> <br> <br>
+				<div class="copyright">
+					&copy; Horoscope. Design LambrosCrypto. Powered by <a href="https://nebulas.io">Nebulas</a>.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
