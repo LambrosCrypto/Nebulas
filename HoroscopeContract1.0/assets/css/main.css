@@ -1582,6 +1582,16 @@
 			transition: none !important;
 		}
 
+		.loader {
+		    margin: auto;
+		    border: 16px solid #f3f3f3; /* Light grey */
+		    border-top: 16px solid #3dc9b3; /* Blue */
+		    border-radius: 50%;
+		    width: 120px;
+		    height: 120px;
+		    animation: spin 2s linear infinite;
+		}
+
 	.inner {
 		margin: 0 auto;
 		max-width: 65em;
@@ -2922,7 +2932,7 @@
 
 	#banner {
 		padding: 20em 0 5em 0;
-		background-image: url(../../images/wallpaper2.jpg);
+		background-image: url(../../images/wallpaper3.jpg);
 		background-size: cover;
 		background-position: center top;
 		background-repeat: no-repeat;
