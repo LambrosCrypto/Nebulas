@@ -114,6 +114,8 @@
 									<p class="animated fadeInUp delay-1s">Horoscope shown at <span id=hor_request_date></span>.
 									<br><br><a id="viewTx" href="#">View Transaction</a> as Proof on the Block Explorer.</p>
 									<button id=refresh onclick="javascript:goHome()" class="learn-more-btn">Go home</button>
+									<button id=refresh onclick="javascript:getMoreInfo()" class="learn-more-btn">More info</button>
+
 							</div>
 					</div>
 					<!-- HIDE INPUT INTERFAZE FUNCTION -->
@@ -221,6 +223,10 @@
 							var href = window.location.href;
 							var dir = href.substring(0, href.lastIndexOf('/')) + "/";
 							window.location = dir + "index.html";
+						}
+							//GO TO GET MORE INFO ABOUT YOUR DAILY HOROSCOPE
+						function getMoreInfo(){
+							window.location = "https://www.astrology.com/horoscope/daily/" + 'aries' + '.html';
 						}
 
 						if(typeof(webExtensionWallet) === "undefined"){
