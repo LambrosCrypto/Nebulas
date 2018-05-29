@@ -226,7 +226,23 @@
 						}
 							//GO TO GET MORE INFO ABOUT YOUR DAILY HOROSCOPE
 						function getMoreInfo(){
-							window.location = "https://www.astrology.com/horoscope/daily/" + 'aries' + '.html';
+							neb.api.call({
+									from: contract_address,
+									to: contract_address,
+									value: 0,
+									nonce: 0,
+									gasPrice: gas_price,
+									gasLimit: gas_limit,
+									contract: {function: "getHoroscope", args: JSON.stringify([window.location.search.substr(8)])}
+							}).then(function (resp) {
+									var response = JSON.parse(resp.result);
+									if(response) {
+											window.location = "https://www.astrology.com/horoscope/daily/" + response.horoscope + '.html';
+											//alternnative that opens in new windown. Chrome blocks it. You have to unblock it. window.open("https://www.astrology.com/horoscope/daily/" + response.horoscope + '.html', "_blank", "location=yes,height=570,width=520,scrollbars=yes,status=yes");
+									} else {
+											setTimeout(onClickRefresh, 3000);
+									}
+							});
 						}
 
 						if(typeof(webExtensionWallet) === "undefined"){
